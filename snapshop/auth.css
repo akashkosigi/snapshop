@@ -1,0 +1,534 @@
+/* ===========================
+   CSS Variables for Auth Pages
+   =========================== */
+:root {
+    /* Light Mode Colors */
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary-color: #ec4899;
+    --background: #ffffff;
+    --surface: #f8fafc;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-lg: rgba(0, 0, 0, 0.15);
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    --overlay: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] {
+    /* Dark Mode Colors */
+    --primary-color: #818cf8;
+    --primary-hover: #6366f1;
+    --secondary-color: #f472b6;
+    --background: #0f172a;
+    --surface: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-lg: rgba(0, 0, 0, 0.5);
+    --success: #34d399;
+    --error: #f87171;
+    --warning: #fbbf24;
+    --overlay: rgba(0, 0, 0, 0.7);
+}
+
+/* ===========================
+   Global Styles
+   =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+}
+
+/* ===========================
+   Auth Container
+   =========================== */
+.auth-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===========================
+   Left Side - Branding
+   =========================== */
+.auth-branding {
+    flex: 1;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-branding::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 20s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(-20px, -20px) scale(1.1);
+    }
+}
+
+.branding-content {
+    max-width: 500px;
+    position: relative;
+    z-index: 1;
+}
+
+.brand-logo {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.branding-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.branding-content > p {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    line-height: 1.8;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+}
+
+/* ===========================
+   Right Side - Auth Forms
+   =========================== */
+.auth-forms {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: var(--background);
+    position: relative;
+}
+
+.theme-toggle-container {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+
+.theme-toggle {
+    background: var(--surface);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.75rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: var(--border-color);
+    transform: scale(1.05);
+}
+
+.moon-icon {
+    display: none;
+}
+
+[data-theme="dark"] .sun-icon {
+    display: none;
+}
+
+[data-theme="dark"] .moon-icon {
+    display: block;
+}
+
+/* ===========================
+   Form Container
+   =========================== */
+.form-container {
+    width: 100%;
+    max-width: 450px;
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.form-container.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-header h2 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* ===========================
+   Auth Form
+   =========================== */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.input-group input {
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--surface);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: var(--background);
+}
+
+.input-group input.error {
+    border-color: var(--error);
+}
+
+.password-input {
+    position: relative;
+}
+
+.password-input input {
+    padding-right: 3rem;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+.eye-off-icon {
+    display: none;
+}
+
+.toggle-password.active .eye-icon {
+    display: none;
+}
+
+.toggle-password.active .eye-off-icon {
+    display: block;
+}
+
+.error-msg {
+    color: var(--error);
+    font-size: 0.85rem;
+    min-height: 1.2rem;
+}
+
+/* ===========================
+   Password Strength Indicator
+   =========================== */
+.password-strength {
+    margin-top: 0.5rem;
+}
+
+.strength-bar {
+    width: 100%;
+    height: 4px;
+    background-color: var(--border-color);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.strength-fill.weak {
+    width: 33%;
+    background-color: var(--error);
+}
+
+.strength-fill.medium {
+    width: 66%;
+    background-color: var(--warning);
+}
+
+.strength-fill.strong {
+    width: 100%;
+    background-color: var(--success);
+}
+
+.strength-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* ===========================
+   Form Options
+   =========================== */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.forgot-password,
+.link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover,
+.link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* ===========================
+   Submit Button
+   =========================== */
+.submit-btn {
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-lg);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* ===========================
+   Form Footer
+   =========================== */
+.form-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.form-footer p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.switch-form {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.switch-form:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* ===========================
+   Toast Notification
+   =========================== */
+.toast {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--text-primary);
+    color: var(--background);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px var(--shadow-lg);
+    z-index: 3000;
+    transition: bottom 0.3s ease;
+    font-weight: 500;
+    min-width: 300px;
+    text-align: center;
+}
+
+.toast.show {
+    bottom: 2rem;
+}
+
+.toast.success {
+    background-color: var(--success);
+    color: white;
+}
+
+.toast.error {
+    background-color: var(--error);
+    color: white;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 1024px) {
+    .auth-branding {
+        display: none;
+    }
+    
+    .auth-forms {
+        flex: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-forms {
+        padding: 1rem;
+    }
+    
+    .form-container {
+        max-width: 100%;
+    }
+    
+    .form-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .theme-toggle-container {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
